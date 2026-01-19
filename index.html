@@ -52,7 +52,7 @@
 
     .title{
       text-align:center;
-      font-weight: 900; /* Ultra Bold */
+      font-weight: 900;
       letter-spacing: .3px;
       font-size: clamp(28px, 4vw, 52px);
       color: var(--titleColor);
@@ -87,23 +87,24 @@
       line-height: 1.1;
     }
 
-    /* كبسولات الأيام (زي أزرار تطبيقات الموبايل) */
+    /* ✅ نسخة Compact (قريبة من القديم) */
     .days{
       display:flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 10px;
+      margin-bottom: 10px;
+      justify-content: center;
     }
 
     .dayBtn{
-      width: 148px;
-      height: 64px;
-      border-radius: 22px;
+      width: 118px;
+      height: 52px;
+      border-radius: 18px;
       border: 0;
       color: #fff;
       font-weight: 900;
-      font-size: 18px;
-      letter-spacing: .6px;
+      font-size: 16px;
+      letter-spacing: .4px;
       box-shadow: var(--shadow2);
       cursor:pointer;
       display:flex;
@@ -119,6 +120,7 @@
       outline-offset: 2px;
     }
 
+    /* ألوان الأزرار */
     .dayBtn.sun{ background: var(--sun); }
     .dayBtn.mon{ background: var(--mon); }
     .dayBtn.tue{ background: var(--tue); }
@@ -158,7 +160,6 @@
     }
     a:hover{ text-decoration: underline; }
 
-    /* فاصل كريتيف بنفس لون أسماء البروموترز */
     .divider{
       width: 86%;
       height: 0;
@@ -168,12 +169,22 @@
       opacity: .85;
     }
 
-    /* ملاحظة صغيرة تحت الصفحة */
     .foot{
       margin-top: 26px;
       color: var(--muted);
       font-size: 12px;
       text-align:center;
+    }
+
+    /* ✅ أصغر تلقائيًا على الموبايل */
+    @media (max-width: 420px){
+      .dayBtn{
+        width: 104px;
+        height: 46px;
+        font-size: 15px;
+        border-radius: 16px;
+      }
+      .days{ gap: 8px; }
     }
   </style>
 </head>
@@ -188,6 +199,7 @@
       <h2 class="promoterName">Osman Alawadh</h2>
 
       <div class="days">
+        <!-- ✅ شلت sunBtn الزيادة -->
         <button class="dayBtn sun" data-target="osman-sun" aria-expanded="false">SUN</button>
         <button class="dayBtn mon" data-target="osman-mon" aria-expanded="false">MON</button>
         <button class="dayBtn tue" data-target="osman-tue" aria-expanded="false">TUE</button>
@@ -251,7 +263,7 @@
         <button class="dayBtn sat" data-target="wahatal-sat" aria-expanded="false">SAT</button>
       </div>
 
-      <!-- Sunday: طبيعي Day+Night -->
+      <!-- ✅ Sunday: شغالين الاتنين Day+Night -->
       <div class="panel" id="wahatal-sun">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
@@ -288,7 +300,7 @@
         <div class="muted"><b>Shifts:</b> Day shift = Omar • Night shift = Jamal</div>
       </div>
 
-      <!-- Friday: Night Shift فقط (جمال) + عمر Day Off (الجمعة) -->
+      <!-- ✅ Friday: Night Shift فقط (جمال) + عمر Off -->
       <div class="panel" id="wahatal-fri">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
@@ -296,7 +308,7 @@
         <div class="muted"><b>Friday rule:</b> Night shift only • Covered by Jamal (Omar Day off)</div>
       </div>
 
-      <!-- Saturday: Night Shift فقط (عمر) + جمال Day Off (السبت) -->
+      <!-- ✅ Saturday: Night Shift فقط (عمر) + جمال Off -->
       <div class="panel" id="wahatal-sat">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
@@ -321,6 +333,7 @@
         <button class="dayBtn sat" data-target="mamdouh-sat" aria-expanded="false">SAT</button>
       </div>
 
+      <!-- Sunday = Day Off (القاعدة العامة) -->
       <div class="panel" id="mamdouh-sun">
         <div class="row"><span class="label">Day off:</span>Day off</div>
       </div>
@@ -373,6 +386,7 @@
         <button class="dayBtn sat" data-target="baher-sat" aria-expanded="false">SAT</button>
       </div>
 
+      <!-- Sunday = Day Off -->
       <div class="panel" id="baher-sun">
         <div class="row"><span class="label">Day off:</span>Day off</div>
       </div>
@@ -425,6 +439,7 @@
         <button class="dayBtn sat" data-target="mahmoud-sat" aria-expanded="false">SAT</button>
       </div>
 
+      <!-- Sunday = Day Off -->
       <div class="panel" id="mahmoud-sun">
         <div class="row"><span class="label">Day off:</span>Day off</div>
       </div>
@@ -467,7 +482,7 @@
   </div>
 
   <script>
-    // Accordion behavior: open/close day panels; optionally close others in the same promoter.
+    // Accordion behavior: open/close day panels; close others in the same promoter.
     (function(){
       const buttons = document.querySelectorAll(".dayBtn");
 
