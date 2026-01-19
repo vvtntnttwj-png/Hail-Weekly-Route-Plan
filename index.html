@@ -7,105 +7,93 @@
 
   <style>
     :root{
-      /* مطابق للألوان اللي اعتمدناها قبل كده */
       --titleColor: #B3375A;
-      --promoterColor: #46878A;
+      --promoterColor: #2f7a7a;
 
-      --bg1:#e7fbff;
-      --bg2:#eaf3ff;
+      /* خلفية قريبة من القديم */
+      --bg: #dff6f9;
 
       --card:#ffffff;
-      --cardSoft: rgba(255,255,255,.78);
       --text:#111;
       --muted:#5a5a5a;
       --link:#0b66d1;
 
-      --shadow: 0 10px 30px rgba(0,0,0,.08);
-      --shadow2: 0 8px 18px rgba(0,0,0,.12);
+      /* ألوان الأيام (مطابقة لشكل القديم قدر الإمكان) */
+      --sun:#f5b400;  /* yellow */
+      --mon:#2f80ed;  /* blue */
+      --tue:#34a853;  /* green */
+      --wed:#2dbb7a;  /* green-teal */
+      --thu:#8e44ad;  /* purple */
+      --fri:#e74c3c;  /* red */
+      --sat:#6d4c41;  /* brown (كان بني في القديم) */
 
-      /* ألوان الأيام (كل يوم لون مختلف) */
-      --sun:#ffb300;
-      --mon:#2f80ed;
-      --tue:#27ae60;
-      --wed:#1abc9c;
-      --thu:#9b51e0;
-      --fri:#eb5757;
-      --sat:#f2994a;
+      --shadow: 0 10px 24px rgba(0,0,0,.12);
     }
 
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 20% 10%, var(--bg1), transparent 60%),
-        radial-gradient(1000px 600px at 90% 0%, var(--bg2), transparent 55%),
-        linear-gradient(180deg, #eafcff 0%, #f7fbff 55%, #ffffff 100%);
-      padding: 22px 14px 48px;
+      background: var(--bg);
+      padding: 16px 12px 36px;
     }
 
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-    }
+    .wrap{ max-width: 980px; margin: 0 auto; }
 
+    /* عنوان قريب من القديم (مش ضخم قوي) */
     .title{
       text-align:center;
       font-weight: 900;
-      letter-spacing: .3px;
-      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: .2px;
+      font-size: 34px;
       color: var(--titleColor);
-      margin: 6px 0 22px;
-      line-height: 1.05;
+      margin: 10px 0 8px;
+      line-height: 1.08;
     }
 
     .subtitle{
       text-align:center;
       color: var(--muted);
-      margin: 0 0 26px;
+      margin: 0 0 18px;
       font-size: 14px;
+      line-height: 1.35;
     }
 
     .promoter{
-      background: var(--cardSoft);
-      border-radius: 18px;
-      padding: 18px 16px 16px;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 14px 14px 12px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
-    }
-
-    .promoter + .divider{
-      margin: 26px auto;
     }
 
     .promoterName{
-      font-size: clamp(20px, 3vw, 34px);
+      font-size: 22px;
       font-weight: 800;
       color: var(--promoterColor);
-      margin: 0 0 14px;
-      line-height: 1.1;
+      margin: 0 0 10px;
+      line-height: 1.15;
     }
 
-    /* ✅ نسخة Compact (قريبة من القديم) */
+    /* أزرار الأيام (زي القديم: صغيرة ومضغوطة) */
     .days{
       display:flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 10px;
-      justify-content: center;
     }
 
     .dayBtn{
-      width: 118px;
-      height: 52px;
-      border-radius: 18px;
+      width: 74px;            /* أصغر زي القديم */
+      height: 32px;
+      border-radius: 16px;
       border: 0;
       color: #fff;
-      font-weight: 900;
-      font-size: 16px;
+      font-weight: 800;
+      font-size: 12px;
       letter-spacing: .4px;
-      box-shadow: var(--shadow2);
+      box-shadow: 0 8px 14px rgba(0,0,0,.18);
       cursor:pointer;
       display:flex;
       align-items:center;
@@ -116,11 +104,10 @@
     .dayBtn:active{ transform: scale(.98); }
     .dayBtn:hover{ filter: brightness(1.03); }
     .dayBtn[aria-expanded="true"]{
-      outline: 3px solid rgba(0,0,0,.12);
+      outline: 2px solid rgba(0,0,0,.18);
       outline-offset: 2px;
     }
 
-    /* ألوان الأزرار */
     .dayBtn.sun{ background: var(--sun); }
     .dayBtn.mon{ background: var(--mon); }
     .dayBtn.tue{ background: var(--tue); }
@@ -131,27 +118,20 @@
 
     .panel{
       display:none;
-      background: rgba(255,255,255,.92);
-      border-radius: 14px;
-      padding: 14px 14px;
-      border: 1px solid rgba(0,0,0,.06);
+      background: #eefbff;     /* قريب من القديم */
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid rgba(0,0,0,.08);
     }
     .panel.show{ display:block; }
 
     .row{
-      margin: 8px 0;
+      margin: 6px 0;
       line-height: 1.35;
-      font-size: 15px;
+      font-size: 14px;
     }
-    .label{
-      font-weight: 800;
-      margin-right: 6px;
-    }
-    .muted{
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 8px;
-    }
+    .label{ font-weight: 800; margin-right: 6px; }
+    .muted{ color: var(--muted); font-size: 12px; margin-top: 6px; }
 
     a{
       color: var(--link);
@@ -160,31 +140,18 @@
     }
     a:hover{ text-decoration: underline; }
 
+    /* فاصل زي القديم (رفيع) */
     .divider{
-      width: 86%;
-      height: 0;
+      margin: 14px 0;
       border: 0;
-      border-bottom: 3px solid var(--promoterColor);
-      border-radius: 999px;
-      opacity: .85;
+      border-top: 2px solid rgba(47,122,122,.55);
     }
 
     .foot{
-      margin-top: 26px;
+      margin-top: 16px;
       color: var(--muted);
       font-size: 12px;
       text-align:center;
-    }
-
-    /* ✅ أصغر تلقائيًا على الموبايل */
-    @media (max-width: 420px){
-      .dayBtn{
-        width: 104px;
-        height: 46px;
-        font-size: 15px;
-        border-radius: 16px;
-      }
-      .days{ gap: 8px; }
     }
   </style>
 </head>
@@ -199,7 +166,6 @@
       <h2 class="promoterName">Osman Alawadh</h2>
 
       <div class="days">
-        <!-- ✅ شلت sunBtn الزيادة -->
         <button class="dayBtn sun" data-target="osman-sun" aria-expanded="false">SUN</button>
         <button class="dayBtn mon" data-target="osman-mon" aria-expanded="false">MON</button>
         <button class="dayBtn tue" data-target="osman-tue" aria-expanded="false">TUE</button>
@@ -209,12 +175,12 @@
         <button class="dayBtn sat" data-target="osman-sat" aria-expanded="false">SAT</button>
       </div>
 
-      <!-- Sunday = Day Off (حسب القاعدة الافتراضية) -->
+      <!-- Sunday = Day Off -->
       <div class="panel" id="osman-sun">
         <div class="row"><span class="label">Day off:</span>Day off</div>
       </div>
 
-      <!-- باقي الأيام = نفس الموقع طوال الشهر -->
+      <!-- باقي الأيام -->
       <div class="panel" id="osman-mon">
         <div class="row"><span class="label">Outlet:</span>HAI_T Ghanam Halal Wusayta_DS(GT)_MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>9661231129073</div>
@@ -263,44 +229,41 @@
         <button class="dayBtn sat" data-target="wahatal-sat" aria-expanded="false">SAT</button>
       </div>
 
-      <!-- ✅ Sunday: شغالين الاتنين Day+Night -->
+      <!-- Sunday: شغالين الاتنين -->
       <div class="panel" id="wahatal-sun">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="muted"><b>Shifts:</b> Day shift = Omar • Night shift = Jamal</div>
+        <div class="muted"><b>Shifts:</b> Day = Omar • Night = Jamal</div>
       </div>
 
-      <!-- Mon/Tue/Wed/Thu: طبيعي Day+Night -->
+      <!-- Mon/Tue/Wed/Thu: Day+Night -->
       <div class="panel" id="wahatal-mon">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="muted"><b>Shifts:</b> Day shift = Omar • Night shift = Jamal</div>
+        <div class="muted"><b>Shifts:</b> Day = Omar • Night = Jamal</div>
       </div>
-
       <div class="panel" id="wahatal-tue">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="muted"><b>Shifts:</b> Day shift = Omar • Night shift = Jamal</div>
+        <div class="muted"><b>Shifts:</b> Day = Omar • Night = Jamal</div>
       </div>
-
       <div class="panel" id="wahatal-wed">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="muted"><b>Shifts:</b> Day shift = Omar • Night shift = Jamal</div>
+        <div class="muted"><b>Shifts:</b> Day = Omar • Night = Jamal</div>
       </div>
-
       <div class="panel" id="wahatal-thu">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="muted"><b>Shifts:</b> Day shift = Omar • Night shift = Jamal</div>
+        <div class="muted"><b>Shifts:</b> Day = Omar • Night = Jamal</div>
       </div>
 
-      <!-- ✅ Friday: Night Shift فقط (جمال) + عمر Off -->
+      <!-- Friday: Night فقط (جمال) — عمر OFF الجمعة -->
       <div class="panel" id="wahatal-fri">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
@@ -308,7 +271,7 @@
         <div class="muted"><b>Friday rule:</b> Night shift only • Covered by Jamal (Omar Day off)</div>
       </div>
 
-      <!-- ✅ Saturday: Night Shift فقط (عمر) + جمال Off -->
+      <!-- Saturday: Night فقط (عمر) — جمال OFF السبت -->
       <div class="panel" id="wahatal-sat">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
@@ -333,7 +296,7 @@
         <button class="dayBtn sat" data-target="mamdouh-sat" aria-expanded="false">SAT</button>
       </div>
 
-      <!-- Sunday = Day Off (القاعدة العامة) -->
+      <!-- Sunday = Day Off -->
       <div class="panel" id="mamdouh-sun">
         <div class="row"><span class="label">Day off:</span>Day off</div>
       </div>
@@ -423,66 +386,10 @@
       </div>
     </section>
 
-    <hr class="divider" />
-
-    <!-- 5) Mahmoud -->
-    <section class="promoter" data-promoter="mahmoud">
-      <h2 class="promoterName">Mahmoud Monther Jabr</h2>
-
-      <div class="days">
-        <button class="dayBtn sun" data-target="mahmoud-sun" aria-expanded="false">SUN</button>
-        <button class="dayBtn mon" data-target="mahmoud-mon" aria-expanded="false">MON</button>
-        <button class="dayBtn tue" data-target="mahmoud-tue" aria-expanded="false">TUE</button>
-        <button class="dayBtn wed" data-target="mahmoud-wed" aria-expanded="false">WED</button>
-        <button class="dayBtn thu" data-target="mahmoud-thu" aria-expanded="false">THU</button>
-        <button class="dayBtn fri" data-target="mahmoud-fri" aria-expanded="false">FRI</button>
-        <button class="dayBtn sat" data-target="mahmoud-sat" aria-expanded="false">SAT</button>
-      </div>
-
-      <!-- Sunday = Day Off -->
-      <div class="panel" id="mahmoud-sun">
-        <div class="row"><span class="label">Day off:</span>Day off</div>
-      </div>
-
-      <div class="panel" id="mahmoud-mon">
-        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
-        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-      <div class="panel" id="mahmoud-tue">
-        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
-        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-      <div class="panel" id="mahmoud-wed">
-        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
-        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-      <div class="panel" id="mahmoud-thu">
-        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
-        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-      <div class="panel" id="mahmoud-fri">
-        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
-        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-      <div class="panel" id="mahmoud-sat">
-        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
-        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-    </section>
-
-    <p class="foot">
-      Note: Weekly template for January 2026. Only the five provided sites are included.
-    </p>
+    <p class="foot">Note: Weekly template for January 2026. Only the included sites are shown.</p>
   </div>
 
   <script>
-    // Accordion behavior: open/close day panels; close others in the same promoter.
     (function(){
       const buttons = document.querySelectorAll(".dayBtn");
 
