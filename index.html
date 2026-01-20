@@ -1,123 +1,98 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Hail – Weekly Route Plan (Jan 2026)</title>
 
 <style>
 /* ===== Base ===== */
-body {
-  margin: 0;
-  font-family: "Segoe UI", Tahoma, sans-serif;
-  background: #dff5f6; /* نفس خلفية الرابط القديم */
-  color: #245b5b;
+body{
+  margin:0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background:#dff3f6; /* خلفية ثابتة مثل الرابط القديم */
+  color:#111;
 }
 
-.container {
-  max-width: 900px;
-  margin: auto;
-  padding: 16px;
+.container{
+  max-width:980px;
+  margin:0 auto;
+  padding:20px 16px 40px;
 }
 
-/* ===== Header ===== */
-h1 {
-  margin: 12px 0 6px;
-  font-size: 28px;   /* نفس حجم العنوان في الرابط القديم */
-  color: #b03a5b;
-  font-weight: 700;
+/* ===== Title ===== */
+h1{
+  text-align:center;
+  font-size:28px;   /* نفس حجم الرابط القديم */
+  font-weight:800;
+  margin:10px 0 25px;
+  color:#b3375a;
 }
 
-.subtitle {
-  font-size: 14px;
-  color: #4b6f72;
-  margin-bottom: 18px;
+/* ===== Promoter ===== */
+.promoter{
+  margin-bottom:28px;
 }
 
-/* ===== Promoter Card ===== */
-.card {
-  background: #ffffff;
-  border-radius: 18px;
-  padding: 14px 16px 16px;
-  margin-bottom: 18px;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+.promoter h2{
+  font-size:20px;   /* نفس حجم الرابط القديم */
+  font-weight:700;
+  margin:0 0 12px;
+  color:#46878a;
 }
 
-.card h2 {
-  margin: 0 0 12px;
-  font-size: 20px; /* نفس حجم أسماء البروموتر في الرابط القديم */
-  font-weight: 700;
-  color: #2b7a78;
+/* ===== Days Buttons ===== */
+.days{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
 }
+
+.day{
+  width:68px;
+  height:46px;
+  border-radius:14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:800;
+  font-size:14px;
+  color:#fff;
+}
+
+/* ===== Day Colors ===== */
+.sun{ background:#7b61ff; }          /* ثابت */
+.mon{ background:#5f9cff; }          /* ثابت */
+.tue{ background:#c4475c; }          /* Rose Red */
+.wed{ background:#4fa3a5; }          /* ثابت */
+.thu{ background:#f2c94c; }          /* Yellow */
+.fri{ background:#27ae60; }          /* Green */
+.sat{ background:#2bbcd3; }          /* Cyan */
 
 /* ===== Divider ===== */
-.divider {
-  height: 2px;
-  background: #7fbcbc;
-  margin: 16px 0;
-  border-radius: 2px;
+.divider{
+  height:2px;
+  background:#46878a;
+  border-radius:10px;
+  margin:24px 0;
 }
 
-/* ===== Days Grid ===== */
-.days {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-/* ===== Day Button Base ===== */
-.day {
-  min-width: 76px;
-  padding: 10px 16px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 700;
-  text-align: center;
-  color: #fff;
-  box-shadow: 0 6px 10px rgba(0,0,0,0.15);
-}
-
-/* ===== Day Colors (حسب طلبك) ===== */
-/* SUN 03 */
-.sun { background: #5b4bb7; }
-
-/* MON 04 */
-.mon { background: #8e44ad; }
-
-/* TUE 05 */
-.tue { background: #e74c3c; }
-
-/* WED 06 */
-.wed { background: #f39c12; }
-
-/* THU 07 */
-.thu { background: #f1c40f; color:#4a4a4a; }
-
-/* FRI 08 */
-.fri { background: #8fd14f; }
-
-/* SAT 09 */
-.sat { background: #2ecc71; }
-
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
-  h1 { font-size: 24px; }
-  .card h2 { font-size: 18px; }
-  .day { min-width: 70px; padding: 9px 14px; }
+/* ===== Footer ===== */
+.footer{
+  margin-top:30px;
+  font-size:12px;
+  color:#555;
+  text-align:center;
 }
 </style>
 </head>
 
 <body>
 <div class="container">
-
 <h1>Hail – Weekly Route Plan (Jan 2026)</h1>
-<div class="subtitle">
-Weekly pattern (Sunday → Saturday). Tap a day to show details. Location links open Google Maps.
-</div>
-<!-- ===== Osman Alawadh ===== -->
-<div class="card">
+<!-- ================= Osman ================= -->
+<div class="promoter">
   <h2>Osman Alawadh</h2>
   <div class="days">
     <div class="day sun">SUN</div>
@@ -128,28 +103,16 @@ Weekly pattern (Sunday → Saturday). Tap a day to show details. Location links 
     <div class="day fri">FRI</div>
     <div class="day sat">SAT</div>
   </div>
+
+  <p>Outlet: HAI_T Ghanam Halal Wusayta_DS(GT)_MN_BR</p>
+  <p>Unicode: 9661231129073</p>
+  <p><a href="https://maps.app.goo.gl/uFPqtXsyttECWpEk6?g_st=ipc" target="_blank">Open Google Maps</a></p>
 </div>
 
 <div class="divider"></div>
 
-<!-- ===== Omar / Jamal ===== -->
-<div class="card">
-  <h2>Omar Farhan Omar Alshammari (Day) / Jamal Mohammed Makhlouf (Night)</h2>
-  <div class="days">
-    <div class="day sun">SUN</div>
-    <div class="day mon">MON</div>
-    <div class="day tue">TUE</div>
-    <div class="day wed">WED</div>
-    <div class="day thu">THU</div>
-    <div class="day fri">FRI</div>
-    <div class="day sat">SAT</div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<!-- ===== Mamdouh ===== -->
-<div class="card">
+<!-- ================= Mamdouh ================= -->
+<div class="promoter">
   <h2>Mamdouh Auwad M Alshammari</h2>
   <div class="days">
     <div class="day sun">SUN</div>
@@ -160,12 +123,16 @@ Weekly pattern (Sunday → Saturday). Tap a day to show details. Location links 
     <div class="day fri">FRI</div>
     <div class="day sat">SAT</div>
   </div>
+
+  <p>Outlet: HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</p>
+  <p>Unicode: 966123117488</p>
+  <p><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank">Open Google Maps</a></p>
 </div>
 
 <div class="divider"></div>
 
-<!-- ===== Baher ===== -->
-<div class="card">
+<!-- ================= Baher ================= -->
+<div class="promoter">
   <h2>Baher Emadedin Shalabi</h2>
   <div class="days">
     <div class="day sun">SUN</div>
@@ -176,8 +143,57 @@ Weekly pattern (Sunday → Saturday). Tap a day to show details. Location links 
     <div class="day fri">FRI</div>
     <div class="day sat">SAT</div>
   </div>
+
+  <p>Outlet: HAI_Anwan Al Waha Ghazayat_DS(GT)_MN_BR</p>
+  <p>Unicode: 966131415096</p>
+  <p><a href="https://maps.app.goo.gl/22cVcNUCt437x5Hh9?g_st=ipc" target="_blank">Open Google Maps</a></p>
 </div>
 
+<div class="divider"></div>
+
+<!-- ================= Mahmoud ================= -->
+<div class="promoter">
+  <h2>Mahmoud Monther Jabr</h2>
+  <div class="days">
+    <div class="day sun">SUN</div>
+    <div class="day mon">MON</div>
+    <div class="day tue">TUE</div>
+    <div class="day wed">WED</div>
+    <div class="day thu">THU</div>
+    <div class="day fri">FRI</div>
+    <div class="day sat">SAT</div>
+  </div>
+
+  <p>Outlet: HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</p>
+  <p>Unicode: 96612361115921</p>
+  <p><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank">Open Google Maps</a></p>
+</div>
+
+<div class="divider"></div>
+
+<!-- ================= Omar / Jamal (LAST) ================= -->
+<div class="promoter">
+  <h2>Omar Farhan Omar Alshammari (Day) / Jamal Mohammed Makhlouf (Night)</h2>
+  <div class="days">
+    <div class="day sun">SUN</div>
+    <div class="day mon">MON</div>
+    <div class="day tue">TUE</div>
+    <div class="day wed">WED</div>
+    <div class="day thu">THU</div>
+    <div class="day fri">FRI</div>
+    <div class="day sat">SAT</div>
+  </div>
+
+  <p>Outlet: HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</p>
+  <p>Unicode: 96612361116420</p>
+  <p><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank">Open Google Maps</a></p>
+
+  <p><strong>Friday:</strong> Night Shift only – Jamal</p>
+  <p><strong>Saturday:</strong> Night Shift only – Omar</p>
+</div>
+<div class="footer">
+  Note: Weekly template for January 2026. Only the included outlets are shown.
+</div>
 </div> <!-- container -->
 </body>
 </html>
