@@ -580,33 +580,6 @@ body.dark .dayBtn.wed{
 
   <script>
     (function(){
-      const storageKey = "hailTheme";
-      const root = document.documentElement;
-      const btn = document.getElementById("themeToggle");
-      if(!btn) return;
-      function setLabel(currentTheme){
-        btn.textContent = (currentTheme === "dark") ? "Light Mode ☀️" : "Dark Mode 🌙";
-        btn.setAttribute("aria-label", btn.textContent);
-      }
-
-      function apply(theme){
-        root.setAttribute("data-theme", theme);
-        setLabel(theme);
-      }
-
-      const savedTheme = localStorage.getItem(storageKey) || "light";
-      apply(savedTheme);
-
-      btn.addEventListener("click", function(){
-        const current = root.getAttribute("data-theme") || "light";
-        const next = (current === "dark") ? "light" : "dark";
-        localStorage.setItem(storageKey, next);
-        apply(next);
-      });
-    })();
-
-
-    (function(){
       const buttons = document.querySelectorAll(".dayBtn");
 
       function closePanelsInSamePromoter(btn){
@@ -622,17 +595,21 @@ body.dark .dayBtn.wed{
           const panel = document.getElementById(targetId);
           if(!panel) return;
 
-          const isOpen = panel.classList.contains("show");
+          // Use aria-expanded as the single source of truth for toggle state
+          const wasExpanded = (btn.getAttribute("aria-expanded") === "true");
+
+          // Always close everything in this promoter first
           closePanelsInSamePromoter(btn);
 
-          if(!isOpen){
+          // If it wasn't expanded, open it now. If it was expanded, we just closed it (toggle off).
+          if(!wasExpanded){
             panel.classList.add("show");
             btn.setAttribute("aria-expanded","true");
           }
         });
       });
     })();
-  </script>
+</script>
 </body>
 </html>
 
