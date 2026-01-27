@@ -578,6 +578,7 @@ body.dark .dayBtn.wed{
     <p class="note">Note: Weekly template for Jan 2026. Only the included outlets are shown.</p>
   </div>
 
+  
   <script>
     (function(){
       const buttons = document.querySelectorAll(".dayBtn");
@@ -595,21 +596,22 @@ body.dark .dayBtn.wed{
           const panel = document.getElementById(targetId);
           if(!panel) return;
 
-          // Use aria-expanded as the single source of truth for toggle state
-          const wasExpanded = (btn.getAttribute("aria-expanded") === "true");
-
-          // Always close everything in this promoter first
-          closePanelsInSamePromoter(btn);
-
-          // If it wasn't expanded, open it now. If it was expanded, we just closed it (toggle off).
-          if(!wasExpanded){
-            panel.classList.add("show");
-            btn.setAttribute("aria-expanded","true");
+          // If this panel is already open, close it directly (failsafe).
+          if(panel.classList.contains("show")){
+            panel.classList.remove("show");
+            btn.setAttribute("aria-expanded","false");
+            return;
           }
+
+          // Otherwise, close others in the same promoter then open this one.
+          closePanelsInSamePromoter(btn);
+          panel.classList.add("show");
+          btn.setAttribute("aria-expanded","true");
         });
       });
     })();
-</script>
+  </script>
+
 </body>
 </html>
 
