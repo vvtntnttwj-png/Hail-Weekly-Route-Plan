@@ -184,33 +184,43 @@
       margin-top: 28px;
       text-align:center;
     }
+    /* Top bar (toggle in its own row) */
+    .topbar{
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      margin: 8px 0 6px;
+    }
 
-    @media (max-width: 420px){
+    
+    .themeToggle{
+      appearance:none;
+      border: 2px solid rgba(0,0,0,.28);
+      background: rgba(255,255,255,.92);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,.10);
+      user-select: none;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    html[data-theme="dark"] .themeToggle{
+      border-color: rgba(255,255,255,.32);
+      background: rgba(18,18,18,.72);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(0,0,0,.35);
+    }
+    .themeToggle:active{ transform: scale(.99); }
+@media (max-width: 420px){
       .dayBtn{ font-size: 13px; padding: 10px 0; border-radius: 24px; }
       .days{ gap: 8px; }
       .panel{ max-width: 92vw; }
     }
   
-    /* ===== Theme Toggle Button ===== */
-    .themeToggle{
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      z-index: 9999;
-      border: 1px solid var(--toggleBorder);
-      background: var(--toggleBg);
-      color: var(--toggleText);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      box-shadow: 0 6px 18px rgba(0,0,0,.12);
-    }
-    .themeToggle:active{ transform: scale(.98); }
-
     /* ===== Dark theme (manual toggle) ===== */
     html[data-theme="dark"]{
       --pageBg:#0b1220;
@@ -238,38 +248,31 @@
     }
 
   
-/* Ultra-soft WED text outline (almost invisible) */
-.dayBtn.wed{
-  color:#ffffff;
-  text-shadow:
-    0 0 0.3px rgba(0,0,0,0.35),
-    0 0 0.6px rgba(0,0,0,0.25);
-}
+/* WED text: outlined ONLY in Light Mode */
+.dayBtn.wed{ color:#ffffff; } /* default */
 
-
-/* WED text visibility — ONLY in Light Mode */
 body:not(.dark) .dayBtn.wed{
-  color:#ffffff;
-  text-shadow:
-    0 0.5px 0 rgba(0,95,115,.25),
-    0 -0.5px 0 rgba(0,95,115,.18);
-}
-/* Disable any WED text shadow in Dark Mode */
-body.dark .dayBtn.wed{
-  text-shadow:none;
+  color:#ffffff;                 /* white fill */
+  -webkit-text-stroke: 0.6px #B5C1C1;  /* very light gray outline */
+  text-stroke: 0.6px #B5C1C1;
+  text-shadow: 0 0 0.6px rgba(181,193,193,0.35); /* soft edge */
 }
 
-</style>
+body.dark .dayBtn.wed{
+  -webkit-text-stroke: 0px transparent; /* no outline in Dark Mode */
+  text-shadow: none;
+}
+  </style>
   <!-- Fonts: Poppins (Title) + Inter (Body) -->
 </head>
 
 <body>
   <div class="wrap">
+    <div class="topbar">
+      <button id="themeToggle" class="themeToggle" type="button">Dark Mode 🌙</button>
+    </div>
 
-    <button class="themeToggle" id="themeToggle" type="button" aria-pressed="false">Dark</button>
-
-
-    <h1>
+<h1>
       <span class="titleLine1">Hail – Weekly Route Plan</span>
       <span class="titleLine2">(Jan 2026)</span>
     </h1>
@@ -291,7 +294,9 @@ body.dark .dayBtn.wed{
       </div>
 
       <div class="panel" id="osman-sun">
-        <div class="row"><span class="label">Day off:</span>Day off</div>
+        <div class="row"><span class="label">Outlet:</span>HAI_T Ghanam Halal Wusayta_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>9661231129073</div>
+        <div class="row"><a href="https://maps.app.goo.gl/uFPqtXsyttECWpEk6?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
       </div>
 
       <div class="panel" id="osman-mon">
@@ -319,9 +324,8 @@ body.dark .dayBtn.wed{
       </div>
 
       <div class="panel" id="osman-fri">
-        <div class="row"><span class="label">Outlet:</span>HAI_T Ghanam Halal Wusayta_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>9661231129073</div>
-        <div class="row"><a href="https://maps.app.goo.gl/uFPqtXsyttECWpEk6?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
+        <div class="row"><span class="label">Day off:</span>Day off</div>
+      </div>
       </div>
 
       <div class="panel" id="osman-sat">
@@ -334,54 +338,55 @@ body.dark .dayBtn.wed{
     <hr class="divider" />
 
     <!-- 2) Mamdouh -->
-    <section class="promoter" data-promoter="mamdouh">
-      <h2>Mamdouh Auwad M Alshammari</h2>
+    <section class="promoter" data-promoter="jamal">
+      <h2>Jamal Mohammed Makhlouf</h2>
 
       <div class="days">
-        <button class="dayBtn sun" data-target="mamdouh-sun" aria-expanded="false">SUN</button>
-        <button class="dayBtn mon" data-target="mamdouh-mon" aria-expanded="false">MON</button>
-        <button class="dayBtn tue" data-target="mamdouh-tue" aria-expanded="false">TUE</button>
-        <button class="dayBtn wed" data-target="mamdouh-wed" aria-expanded="false">WED</button>
-        <button class="dayBtn thu" data-target="mamdouh-thu" aria-expanded="false">THU</button>
-        <button class="dayBtn fri" data-target="mamdouh-fri" aria-expanded="false">FRI</button>
-        <button class="dayBtn sat" data-target="mamdouh-sat" aria-expanded="false">SAT</button>
+        <button class="dayBtn sun" data-target="jamal-sun" aria-expanded="false">SUN</button>
+        <button class="dayBtn mon" data-target="jamal-mon" aria-expanded="false">MON</button>
+        <button class="dayBtn tue" data-target="jamal-tue" aria-expanded="false">TUE</button>
+        <button class="dayBtn wed" data-target="jamal-wed" aria-expanded="false">WED</button>
+        <button class="dayBtn thu" data-target="jamal-thu" aria-expanded="false">THU</button>
+        <button class="dayBtn fri" data-target="jamal-fri" aria-expanded="false">FRI</button>
+        <button class="dayBtn sat" data-target="jamal-sat" aria-expanded="false">SAT</button>
       </div>
 
-      <div class="panel" id="mamdouh-sun">
+      <div class="panel" id="jamal-sun">
+        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>966123117488</div>
+        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
+      </div>
+
+      <div class="panel" id="jamal-mon">
+        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>966123117488</div>
+        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
+      </div>
+
+      <div class="panel" id="jamal-tue">
+        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>966123117488</div>
+        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
+      </div>
+
+      <div class="panel" id="jamal-wed">
+        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>966123117488</div>
+        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
+      </div>
+
+      <div class="panel" id="jamal-thu">
+        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>966123117488</div>
+        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
+      </div>
+
+      <div class="panel" id="jamal-fri">
         <div class="row"><span class="label">Day off:</span>Day off</div>
       </div>
-
-      <div class="panel" id="mamdouh-mon">
-        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>966123117488</div>
-        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
       </div>
 
-      <div class="panel" id="mamdouh-tue">
-        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>966123117488</div>
-        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-
-      <div class="panel" id="mamdouh-wed">
-        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>966123117488</div>
-        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-
-      <div class="panel" id="mamdouh-thu">
-        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>966123117488</div>
-        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-
-      <div class="panel" id="mamdouh-fri">
-        <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>966123117488</div>
-        <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
-      </div>
-
-      <div class="panel" id="mamdouh-sat">
+      <div class="panel" id="jamal-sat">
         <div class="row"><span class="label">Outlet:</span>HAI_Markaz Mutlaq Nasar_DS(GT)_MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>966123117488</div>
         <div class="row"><a href="https://maps.app.goo.gl/Mv32T3YYyqb7gSBg7?g_st=iw" target="_blank" rel="noopener">Open Google Maps</a></div>
@@ -405,7 +410,9 @@ body.dark .dayBtn.wed{
       </div>
 
       <div class="panel" id="baher-sun">
-        <div class="row"><span class="label">Day off:</span>Day off</div>
+        <div class="row"><span class="label">Outlet:</span>HAI_Anwan Al Waha Ghazayat_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>966131415096</div>
+        <div class="row"><a href="https://maps.app.goo.gl/22cVcNUCt437x5Hh9?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
       </div>
 
       <div class="panel" id="baher-mon">
@@ -433,9 +440,8 @@ body.dark .dayBtn.wed{
       </div>
 
       <div class="panel" id="baher-fri">
-        <div class="row"><span class="label">Outlet:</span>HAI_Anwan Al Waha Ghazayat_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>966131415096</div>
-        <div class="row"><a href="https://maps.app.goo.gl/22cVcNUCt437x5Hh9?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
+        <div class="row"><span class="label">Day off:</span>Day off</div>
+      </div>
       </div>
 
       <div class="panel" id="baher-sat">
@@ -462,7 +468,9 @@ body.dark .dayBtn.wed{
       </div>
 
       <div class="panel" id="mahmoud-sun">
-        <div class="row"><span class="label">Day off:</span>Day off</div>
+        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
+        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
+        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
       </div>
 
       <div class="panel" id="mahmoud-mon">
@@ -490,9 +498,8 @@ body.dark .dayBtn.wed{
       </div>
 
       <div class="panel" id="mahmoud-fri">
-        <div class="row"><span class="label">Outlet:</span>HAI_Tamwenat Roken Jana_DS(GT)_MN_BR</div>
-        <div class="row"><span class="label">Unicode:</span>96612361115921</div>
-        <div class="row"><a href="https://maps.app.goo.gl/iP4efAxQXPKTo7eq8?g_st=ipc" target="_blank" rel="noopener">Open Google Maps</a></div>
+        <div class="row"><span class="label">Day off:</span>Day off</div>
+      </div>
       </div>
 
       <div class="panel" id="mahmoud-sat">
@@ -506,7 +513,7 @@ body.dark .dayBtn.wed{
 
     <!-- 5) Wahatal -->
     <section class="promoter" data-promoter="wahatal">
-      <h2>Omar Farhan Omar Alshammari (Day) / Jamal Mohammed Makhlouf (Night)</h2>
+      <h2>Omar Farhan Omar Alshammari (Day) / Mamdouh Auwad Alshammari (Night)</h2>
 
       <div class="days">
         <button class="dayBtn sun" data-target="wahatal-sun" aria-expanded="false">SUN</button>
@@ -522,49 +529,49 @@ body.dark .dayBtn.wed{
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Jamal</div>
+        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Mamdouh</div>
       </div>
 
       <div class="panel" id="wahatal-mon">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Jamal</div>
+        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Mamdouh</div>
       </div>
 
       <div class="panel" id="wahatal-tue">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Jamal</div>
+        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Mamdouh</div>
       </div>
 
       <div class="panel" id="wahatal-wed">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Jamal</div>
+        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Mamdouh</div>
       </div>
 
       <div class="panel" id="wahatal-thu">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Jamal</div>
+        <div class="row"><span class="label">Shifts:</span>Day = Omar • Night = Mamdouh</div>
       </div>
 
       <div class="panel" id="wahatal-fri">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="row"><span class="label">Friday rule:</span>Night only • Jamal (Omar off)</div>
+        <div class="row"><span class="label">Friday rule:</span>Night only • Omar (Mamdouh off)</div>
       </div>
 
       <div class="panel" id="wahatal-sat">
         <div class="row"><span class="label">Outlet:</span>HAI_Wahatal Mutamayuz_SIS(TB)MN_BR</div>
         <div class="row"><span class="label">Unicode:</span>96612361116420</div>
         <div class="row"><a href="https://goo.gl/maps/UXRxe8sX5jW3xSzU9" target="_blank" rel="noopener">Open Google Maps</a></div>
-        <div class="row"><span class="label">Saturday rule:</span>Night only • Omar (Jamal off)</div>
+        <div class="row"><span class="label">Saturday rule:</span>Night only • Mamdouh (Omar off)</div>
       </div>
     </section>
 
@@ -577,27 +584,22 @@ body.dark .dayBtn.wed{
       const root = document.documentElement;
       const btn = document.getElementById("themeToggle");
       if(!btn) return;
-
-      function systemPref(){
-        return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      function setLabel(currentTheme){
+        btn.textContent = (currentTheme === "dark") ? "Light Mode ☀️" : "Dark Mode 🌙";
+        btn.setAttribute("aria-label", btn.textContent);
       }
+
       function apply(theme){
-        if(theme === "dark" || theme === "light"){
-          root.setAttribute("data-theme", theme);
-        }else{
-          root.removeAttribute("data-theme");
-          theme = systemPref();
-        }
-        btn.textContent = (theme === "dark") ? "Light" : "Dark";
-        btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+        root.setAttribute("data-theme", theme);
+        setLabel(theme);
       }
 
-      const saved = localStorage.getItem(storageKey);
-      apply(saved || systemPref());
+      const savedTheme = localStorage.getItem(storageKey) || "light";
+      apply(savedTheme);
 
-      btn.addEventListener("click", () => {
-        const cur = root.getAttribute("data-theme") || systemPref();
-        const next = (cur === "dark") ? "light" : "dark";
+      btn.addEventListener("click", function(){
+        const current = root.getAttribute("data-theme") || "light";
+        const next = (current === "dark") ? "light" : "dark";
         localStorage.setItem(storageKey, next);
         apply(next);
       });
