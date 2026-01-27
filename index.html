@@ -7,6 +7,9 @@
 
   <style>
     :root{
+      --pageBg: var(--bg);
+      --panelBg: rgba(255,255,255,.72);
+
       /* Fonts (offline-safe / iOS-friendly) */
       --fontBody: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Arial, sans-serif;
       --fontTitle: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Avenir Next", "Segoe UI", Roboto, Arial, sans-serif;
@@ -325,7 +328,7 @@ body.dark .dayBtn.wed{
 
       <div class="panel" id="osman-fri">
         <div class="row"><span class="label">Day off:</span>Day off</div>
-      </div>
+
       </div>
 
       <div class="panel" id="osman-sat">
@@ -383,7 +386,7 @@ body.dark .dayBtn.wed{
 
       <div class="panel" id="jamal-fri">
         <div class="row"><span class="label">Day off:</span>Day off</div>
-      </div>
+
       </div>
 
       <div class="panel" id="jamal-sat">
@@ -441,7 +444,7 @@ body.dark .dayBtn.wed{
 
       <div class="panel" id="baher-fri">
         <div class="row"><span class="label">Day off:</span>Day off</div>
-      </div>
+
       </div>
 
       <div class="panel" id="baher-sat">
@@ -499,7 +502,7 @@ body.dark .dayBtn.wed{
 
       <div class="panel" id="mahmoud-fri">
         <div class="row"><span class="label">Day off:</span>Day off</div>
-      </div>
+
       </div>
 
       <div class="panel" id="mahmoud-sat">
@@ -610,6 +613,38 @@ body.dark .dayBtn.wed{
         });
       });
     })();
+  
+    (function(){
+      const htmlEl = document.documentElement;
+      const toggle = document.getElementById("themeToggle");
+      if(!toggle) return;
+
+      function setTheme(mode){
+        if(mode === "dark"){
+          htmlEl.setAttribute("data-theme","dark");
+          document.body.classList.add("dark");
+          toggle.textContent = "Light Mode ☀️";
+          try{ localStorage.setItem("hailTheme","dark"); }catch(e){}
+        }else{
+          htmlEl.removeAttribute("data-theme");
+          document.body.classList.remove("dark");
+          toggle.textContent = "Dark Mode 🌙";
+          try{ localStorage.setItem("hailTheme","light"); }catch(e){}
+        }
+      }
+
+      // init
+      let saved = null;
+      try{ saved = localStorage.getItem("hailTheme"); }catch(e){}
+      if(saved === "dark") setTheme("dark");
+      else if(saved === "light") setTheme("light");
+
+      toggle.addEventListener("click", () => {
+        const isDark = htmlEl.getAttribute("data-theme") === "dark" || document.body.classList.contains("dark");
+        setTheme(isDark ? "light" : "dark");
+      });
+    })();
+
   </script>
 
 </body>
