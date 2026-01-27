@@ -7,6 +7,7 @@
 
   <style>
     :root{
+      /* Light theme (default) */
       --bg:#e0f7fa;
       --titleColor:#B3375A;
       --promoterColor:#46878A;
@@ -14,6 +15,9 @@
       --text:#111;
       --muted:#555;
       --link:#0077cc;
+
+      --panelBg: rgba(255,255,255,.82);
+      --panelBorder: rgba(0,0,0,.06);
 
       /* Button colors (03 → 09) */
       --sun:#292285; /* 03 */
@@ -25,9 +29,27 @@
       --sat:#00C8C8; /* 09 */
 
       --shadowBtn: 0 4px 10px rgba(0,0,0,.18);
+      --shadowCard: 0 10px 30px rgba(0,0,0,.10);
     }
 
-    *{ box-sizing:border-box; }
+    /* Dark theme (applied when data-theme="dark") */
+    [data-theme="dark"]{
+      --bg:#0c1214;
+      --titleColor:#ff6b93;
+      --promoterColor:#7fd6da;
+
+      --text:#f2f5f6;
+      --muted:#b0b8bc;
+      --link:#79b8ff;
+
+      --panelBg: rgba(255,255,255,.06);
+      --panelBorder: rgba(255,255,255,.10);
+
+      --shadowBtn: 0 4px 12px rgba(0,0,0,.45);
+      --shadowCard: 0 10px 30px rgba(0,0,0,.55);
+    }
+
+*{ box-sizing:border-box; }
 
     body{
       margin:0;
@@ -131,10 +153,12 @@
       display:none;
       margin: 0 0 10px;
       max-width: 720px;
-      background: rgba(255,255,255,.82);
+      background: var(--panelBg);
+      border: 1px solid var(--panelBorder);
       padding: 10px 12px;
       border-radius: 10px;
       text-align:left;
+      box-shadow: var(--shadowCard);
     }
     .panel.show{ display:block; }
 
@@ -169,6 +193,34 @@
       .days{ gap: 8px; }
       .panel{ max-width: 92vw; }
     }
+  
+    /* Theme toggle */
+    .topBar{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      margin: 0 0 10px;
+    }
+    .themeBtn{
+      border: 1px solid rgba(0,0,0,.15);
+      background: rgba(255,255,255,.55);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor:pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,.10);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .themeBtn:active{ transform: scale(.98); }
+
+    [data-theme="dark"] .themeBtn{
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 6px 18px rgba(0,0,0,.45);
+    }
+
   </style>
 </head>
 
@@ -181,6 +233,10 @@
     </h1>
 
     <p class="subtitle">Weekly pattern (Sunday → Saturday). Tap a day to show details. Location links open Google Maps.</p>
+
+    <div class="topBar">
+      <button class="themeBtn" id="themeBtn" type="button" aria-label="Toggle dark mode">Dark mode</button>
+    </div>
 
 <section class="promoter" data-promoter="osman">
       <h2>Osman Alawadh</h2>
@@ -471,6 +527,57 @@
 
     <p class="note">Note: Weekly template for Jan 2026. Only the included outlets are shown.</p>
   </div>
+
+
+  <script>
+    (function(){
+      // Theme: 'light' | 'dark'
+      const STORAGE_KEY = "hail_route_theme";
+      const root = document.documentElement;
+      const btn = () => document.getElementById("themeBtn");
+
+      function getSystemTheme(){
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+
+      function applyTheme(theme){
+        root.setAttribute("data-theme", theme);
+        const b = btn();
+        if(b){
+          b.textContent = theme === "dark" ? "Light mode" : "Dark mode";
+          b.setAttribute("aria-label", theme === "dark" ? "Switch to light mode" : "Switch to dark mode");
+        }
+      }
+
+      function init(){
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const theme = saved === "light" || saved === "dark" ? saved : getSystemTheme();
+        applyTheme(theme);
+
+        const b = btn();
+        if(b){
+          b.addEventListener("click", () => {
+            const current = root.getAttribute("data-theme") || getSystemTheme();
+            const next = current === "dark" ? "light" : "dark";
+            localStorage.setItem(STORAGE_KEY, next);
+            applyTheme(next);
+          });
+        }
+
+        // If no saved preference, keep following system changes
+        if(!saved && window.matchMedia){
+          const mq = window.matchMedia("(prefers-color-scheme: dark)");
+          mq.addEventListener?.("change", () => {
+            const savedNow = localStorage.getItem(STORAGE_KEY);
+            if(savedNow) return;
+            applyTheme(getSystemTheme());
+          });
+        }
+      }
+
+      try{ init(); }catch(e){}
+    })();
+  </script>
 
   <script>
     (function(){
